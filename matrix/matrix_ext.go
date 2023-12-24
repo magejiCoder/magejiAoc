@@ -10,6 +10,18 @@ type insider[T constraints.Ordered] struct {
 	match      func(Point[T]) bool
 }
 
+func WithCornerPass[T constraints.Ordered](cornerPass map[grid.Vec]struct{}) insiderOption[T] {
+	return func(i *insider[T]) {
+		i.cornerPass = cornerPass
+	}
+}
+
+func WithMatch[T constraints.Ordered](match func(Point[T]) bool) insiderOption[T] {
+	return func(i *insider[T]) {
+		i.match = match
+	}
+}
+
 type insiderOption[T constraints.Ordered] func(*insider[T])
 
 // IsPointInside returns true if the point is inside the matrix
