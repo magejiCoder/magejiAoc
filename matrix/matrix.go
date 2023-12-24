@@ -80,6 +80,10 @@ func (m Matrix[T]) Get(x, y int) T {
 	return m[x][y]
 }
 
+func (m Matrix[T]) Set(x, y int, v T) {
+	m[x][y] = v
+}
+
 func (m Matrix[T]) Rows() int {
 	return len(m)
 }
