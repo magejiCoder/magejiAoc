@@ -172,3 +172,53 @@ func (m Matrix[T]) PrintEx(format string) {
 		fmt.Println()
 	}
 }
+
+func (m Matrix[T]) JoinBottom(n Matrix[T]) Matrix[T] {
+	if m.Rows() != n.Rows() {
+		panic("matrix join error: rows not equal")
+	}
+	var res Matrix[T]
+	for i := 0; i < m.Rows(); i++ {
+		res = append(res, append(m[i], n[i]...))
+	}
+	return res
+}
+
+func (m Matrix[T]) JoinTop(n Matrix[T]) Matrix[T] {
+	if m.Rows() != n.Rows() {
+		panic("matrix join error: rows not equal")
+	}
+	var res Matrix[T]
+	for i := 0; i < m.Rows(); i++ {
+		res = append(res, append(n[i], m[i]...))
+	}
+	return res
+}
+
+func (m Matrix[T]) JoinRight(n Matrix[T]) Matrix[T] {
+	if m.Cols() != n.Cols() {
+		panic("matrix join error: cols not equal")
+	}
+	var res Matrix[T]
+	for i := 0; i < m.Rows(); i++ {
+		var row []T
+		row = append(row, m[i]...)
+		row = append(row, n[i]...)
+		res = append(res, row)
+	}
+	return res
+}
+
+func (m Matrix[T]) JoinLeft(n Matrix[T]) Matrix[T] {
+	if m.Cols() != n.Cols() {
+		panic("matrix join error: cols not equal")
+	}
+	var res Matrix[T]
+	for i := 0; i < m.Rows(); i++ {
+		var row []T
+		row = append(row, n[i]...)
+		row = append(row, m[i]...)
+		res = append(res, row)
+	}
+	return res
+}
