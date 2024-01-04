@@ -117,6 +117,18 @@ func (m Matrix[T]) GetNeighbor(x, y int) []grid.Vec {
 	return ns
 }
 
+func (m Matrix[T]) GetNeighbors(x, y int, all bool) []grid.Vec {
+	if !all {
+		return m.GetNeighbor(x, y)
+	}
+	return []grid.Vec{
+		{X: x - 1, Y: y},
+		{X: x + 1, Y: y},
+		{X: x, Y: y - 1},
+		{X: x, Y: y + 1},
+	}
+}
+
 func (m Matrix[T]) Reset(c T) {
 	for i := 0; i < m.Rows(); i++ {
 		for j := 0; j < m.Cols(); j++ {
