@@ -13,6 +13,8 @@ func TestIsCircleSeq(t *testing.T) {
 	circle := []int{1, 2, 3, 2, 3}
 	ok = IsCircle[int](circle)
 	assert.True(t, ok)
+	ok = IsCircleStable[int](circle)
+	assert.True(t, ok)
 	fakeCircle := []int{1, 2, 3, 2, 4}
 	ok = IsCircle[int](fakeCircle)
 	assert.True(t, ok)

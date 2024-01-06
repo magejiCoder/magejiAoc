@@ -35,7 +35,7 @@ func (c *circleSeq[T]) FindCircle(isStrict bool) (int, int, error) {
 		for j := i + 1; j < len(c.seq); j++ {
 			if c.seq[i] == c.seq[j] {
 				if isStrict {
-					if j < len(c.seq)-2 && c.seq[i+2] == c.seq[j+2] {
+					if j+1 < len(c.seq) && c.seq[i+1] == c.seq[j+1] {
 						x0, x1 = i, j
 						break
 					}
