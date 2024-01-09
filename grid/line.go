@@ -11,6 +11,21 @@ func NewLine(v1, v2 Vec) *Line {
 	return &Line{from: v1, to: v2}
 }
 
+func (l *Line) Vec() Vec {
+	return Vec{l.to.X - l.from.X, l.to.Y - l.from.Y}
+}
+
+func Multiply(v1 Vec, v2 Vec) int {
+	return v1.X*v2.Y - v1.Y*v2.X
+}
+
+func (l Line) Cross(l2 Line) bool {
+	v1 := l.Vec()
+	v2 := l2.Vec()
+	return Multiply(v1, l2.from.Sub(l.from))*Multiply(v1, l2.to.Sub(l.from)) <= 0 &&
+		Multiply(v2, l.from.Sub(l2.from))*Multiply(v2, l.to.Sub(l2.from)) <= 0
+}
+
 func (l *Line) ToX() int {
 	return l.to.X
 }
