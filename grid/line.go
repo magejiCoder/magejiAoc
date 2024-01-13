@@ -1,6 +1,8 @@
 package grid
 
-import "sort"
+import (
+	"sort"
+)
 
 type Line struct {
 	from Vec
@@ -22,6 +24,16 @@ func Multiply(v1 Vec, v2 Vec) int {
 func (l Line) Cross(l2 Line) bool {
 	v1 := l.Vec()
 	v2 := l2.Vec()
+	// v1 is point , v2 is line, v1 is on the line
+	if v1.X == 0 && v1.Y == 0 {
+		return l2.from.X <= l.from.X && l.from.X <= l2.to.X &&
+			l2.from.Y <= l.from.Y && l.from.Y <= l2.to.Y
+	}
+	// v2 is point , v1 is line
+	if v2.X == 0 && v2.Y == 0 {
+		return l.from.X <= l2.from.X && l2.from.X <= l.to.X &&
+			l.from.Y <= l2.from.Y && l2.from.Y <= l.to.Y
+	}
 	return Multiply(v1, l2.from.Sub(l.from))*Multiply(v1, l2.to.Sub(l.from)) <= 0 &&
 		Multiply(v2, l.from.Sub(l2.from))*Multiply(v2, l.to.Sub(l2.from)) <= 0
 }
