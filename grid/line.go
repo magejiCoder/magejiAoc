@@ -17,6 +17,44 @@ func (l *Line) Vec() Vec {
 	return Vec{l.to.X - l.from.X, l.to.Y - l.from.Y}
 }
 
+func (l *Line) Points() []Point {
+	v := l.Vec()
+	// k == 0
+	if v.X == 0 {
+		if v.Y < 0 {
+			v = v.Neg()
+		}
+		ps := make([]Point, v.Y+1)
+		for i := 0; i <= v.Y; i++ {
+			ps[i] = Point{l.from.X, l.from.Y + i}
+		}
+		return ps
+	}
+	// k == 0
+	if v.Y == 0 {
+		if v.X < 0 {
+			v = v.Neg()
+		}
+		ps := make([]Point, v.X+1)
+		for i := 0; i <= v.X; i++ {
+			ps[i] = Point{l.from.X + i, l.from.Y}
+		}
+		return ps
+	}
+	// k == 1
+	if v.X == v.Y {
+		if v.X < 0 {
+			v = v.Neg()
+		}
+		ps := make([]Point, v.X+1)
+		for i := 0; i <= v.X; i++ {
+			ps[i] = Point{l.from.X + i, l.from.Y + i}
+		}
+		return ps
+	}
+	panic("not a line")
+}
+
 func Multiply(v1 Vec, v2 Vec) int {
 	return v1.X*v2.Y - v1.Y*v2.X
 }

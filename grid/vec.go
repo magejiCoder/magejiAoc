@@ -125,9 +125,20 @@ func (m VecMatrix[T]) Reset(c T) {
 	}
 }
 
+// Point is a point in a 2D grid
+type Point struct {
+	X int
+	Y int
+}
+
+// Vec is a vector in a 2D grid
 type Vec struct {
 	X int
 	Y int
+}
+
+func (v Vec) Neg() Vec {
+	return Vec{-v.X, -v.Y}
 }
 
 func Abs(v1, v2 int) int {
