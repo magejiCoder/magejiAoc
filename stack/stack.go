@@ -10,6 +10,10 @@ type Stack[T comparable] struct {
 	*list.List
 }
 
+func NewStack[T comparable]() *Stack[T] {
+	return &Stack[T]{list.New()}
+}
+
 func (s *Stack[T]) Push(v T) {
 	s.PushBack(v)
 }

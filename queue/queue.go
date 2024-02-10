@@ -10,6 +10,10 @@ type Queue[T comparable] struct {
 	*list.List
 }
 
+func NewQueue[T comparable]() *Queue[T] {
+	return &Queue[T]{list.New()}
+}
+
 func (q *Queue[T]) Push(v T) {
 	q.PushBack(v)
 }
