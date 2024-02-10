@@ -100,6 +100,117 @@ func (m Matrix[T]) ForEach(f func(x, y int, v T)) {
 	}
 }
 
+func (m Matrix[T]) GetNeighborVecs(x, y int) []grid.Vec {
+	var ns []grid.Vec
+	if x > 0 {
+		ns = append(ns, grid.Vec{X: -1, Y: 0})
+	}
+	if x < m.Rows()-1 {
+		ns = append(ns, grid.Vec{X: +1, Y: 0})
+	}
+	if y > 0 {
+		ns = append(ns, grid.Vec{X: 0, Y: -1})
+	}
+	if y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: 0, Y: +1})
+	}
+	return ns
+}
+
+func (m Matrix[T]) GetNeighborVecsAll(x, y int) []grid.Vec {
+	return []grid.Vec{
+		{X: -1, Y: 0},
+		{X: +1, Y: 0},
+		{X: 0, Y: -1},
+		{X: 0, Y: +1},
+	}
+}
+
+func (m Matrix[T]) GetNeighborVecs8(x, y int) []grid.Vec {
+	var ns []grid.Vec
+	if x > 0 {
+		ns = append(ns, grid.Vec{X: -1, Y: 0})
+	}
+	if x < m.Rows()-1 {
+		ns = append(ns, grid.Vec{X: +1, Y: 0})
+	}
+	if y > 0 {
+		ns = append(ns, grid.Vec{X: 0, Y: -1})
+	}
+	if y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: 0, Y: +1})
+	}
+	if x > 0 && y > 0 {
+		ns = append(ns, grid.Vec{X: -1, Y: -1})
+	}
+	if x < m.Rows()-1 && y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: +1, Y: +1})
+	}
+	if x > 0 && y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: -1, Y: +1})
+	}
+	if x < m.Rows()-1 && y > 0 {
+		ns = append(ns, grid.Vec{X: +1, Y: -1})
+	}
+	return ns
+}
+
+func (m Matrix[T]) GetNeighborPoints(x, y int) []grid.Point {
+	var ns []grid.Point
+	if x > 0 {
+		ns = append(ns, grid.Point{X: x - 1, Y: y})
+	}
+	if x < m.Rows()-1 {
+		ns = append(ns, grid.Point{X: x + 1, Y: y})
+	}
+	if y > 0 {
+		ns = append(ns, grid.Point{X: x, Y: y - 1})
+	}
+	if y < m.Cols()-1 {
+		ns = append(ns, grid.Point{X: x, Y: y + 1})
+	}
+	return ns
+}
+
+func (m Matrix[T]) GetNeighborPointsAll(x, y int) []grid.Point {
+	return []grid.Point{
+		{X: x - 1, Y: y},
+		{X: x + 1, Y: y},
+		{X: x, Y: y - 1},
+		{X: x, Y: y + 1},
+	}
+}
+
+func (m Matrix[T]) GetNeighborsPoints8(x, y int) []grid.Point {
+	var ns []grid.Point
+	if x > 0 {
+		ns = append(ns, grid.Point{X: x - 1, Y: y})
+	}
+	if x < m.Rows()-1 {
+		ns = append(ns, grid.Point{X: x + 1, Y: y})
+	}
+	if y > 0 {
+		ns = append(ns, grid.Point{X: x, Y: y - 1})
+	}
+	if y < m.Cols()-1 {
+		ns = append(ns, grid.Point{X: x, Y: y + 1})
+	}
+	if x > 0 && y > 0 {
+		ns = append(ns, grid.Point{X: x - 1, Y: y - 1})
+	}
+	if x < m.Rows()-1 && y < m.Cols()-1 {
+		ns = append(ns, grid.Point{X: x + 1, Y: y + 1})
+	}
+	if x > 0 && y < m.Cols()-1 {
+		ns = append(ns, grid.Point{X: x - 1, Y: y + 1})
+	}
+	if x < m.Rows()-1 && y > 0 {
+		ns = append(ns, grid.Point{X: x + 1, Y: y - 1})
+	}
+	return ns
+}
+
+// DEPRECATED: use GetNeighborPoints instead
 func (m Matrix[T]) GetNeighbor(x, y int) []grid.Vec {
 	var ns []grid.Vec
 	if x > 0 {
@@ -117,6 +228,7 @@ func (m Matrix[T]) GetNeighbor(x, y int) []grid.Vec {
 	return ns
 }
 
+// DEPRECATED: use GetNeighborPointsAll instead
 func (m Matrix[T]) GetNeighbors(x, y int, all bool) []grid.Vec {
 	if !all {
 		return m.GetNeighbor(x, y)
@@ -138,6 +250,7 @@ func (m Matrix[T]) Reset(c T) {
 	}
 }
 
+// DEPRECATED: use GetNeighborsPoints8 instead
 func (m Matrix[T]) GetNeighbors8(x, y int) []grid.Vec {
 	var ns []grid.Vec
 	if x > 0 {
