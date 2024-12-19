@@ -6,11 +6,11 @@ import (
 	"strings"
 )
 
-type Queue[T comparable] struct {
+type Queue[T any] struct {
 	*list.List
 }
 
-func NewQueue[T comparable]() *Queue[T] {
+func NewQueue[T any]() *Queue[T] {
 	return &Queue[T]{list.New()}
 }
 
